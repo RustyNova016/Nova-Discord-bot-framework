@@ -1,20 +1,42 @@
+import {BotItemManager} from "@core/class/BotItemManager";
+import {InteractionCreateEvent} from "@core/class/Event";
 import {SlashCommand} from "@core/class/SlashCommand";
-import * as fs from "fs";
+import {CommandInteraction, Interaction} from "discord.js";
 
-export class SlashCommandManager {
-    private slashCommands: SlashCommand[];
+export class SlashCommandManager extends BotItemManager {
+    public items: SlashCommand[];
 
-    public addSlashCommandFromFolder(pathToCommandFolder: string){
-        const commandFiles = fs.readdirSync(pathToCommandFolder).filter(file => file.endsWith('.js'));
+    public getCommandEvent(): InteractionCreateEvent {
+        const interactionCreateEvent = new InteractionCreateEvent(this.executeCommand);
+        interactionCreateEvent.interactionCheck = (interaction: Interaction) => {
+            return interaction.isCommand();
+        };
+        return interactionCreateEvent;
+    }
 
-        for (const commandFile of commandFiles) {
-            const command = require(`pathToCommandFolder/${commandFile}`);
+    public async executeCommand(commandInteraction: CommandInteraction) {
+        for (const slashCommand of this.items) {
+            if (slashCommand.isInteractionFromCommand(commandInteraction)) {
+                try {
+                    slashCommand.execute(commandInteraction);
+                } catch (e) {
+                    await commandInteraction.reply({
+                        content: "There was an error while executing this command!",
+                        ephemeral: true
+                    });
 
-            if (command instanceof SlashCommand) {
-                this.slashCommands.push(command);
-            } else {
-                throw new Error("Command file isn't a command!")
+                    throw e;
+                }
+                break;
             }
         }
+    }
+
+    protected fileContainItem(fileContent): boolean {
+        return fileContent instanceof SlashCommand;
+    }
+
+    protected contentError() {
+        throw new Error("Command file isn't a command!");
     }
 }
