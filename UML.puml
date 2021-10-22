@@ -1,0 +1,125 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package "Discord.js" <<Frame>> {
+    class Client
+
+    class SlashCommandBuilder{
+        + name: String
+        + description: string
+    }
+
+    class SlashCommandSubcommandBuilder
+}
+
+
+
+class BotClient{
+    + addEvents(eventManager: EventManager): void
+}
+BotClient <|-- Client
+
+class BotItemManager{
+    +{abstract} items: any[]
+
+    -{static} getFiles(pathToFolder: string): string[]
+    #{abstract} fileContainItem(fileContent): boolean
+    + addFromFolder(pathToFolder: string): void
+    #{abstract} contentError(): void
+}
+
+
+class ModelManager{
+
+}
+
+
+class EventManager{
+    +items: Event[]
+
+    #contentError(): void
+    #fileContainItem(fileContent): boolean
+}
+EventManager <|-- BotItemManager
+BotClient "1" *-- EventManager
+
+class Event{
+    + name: string
+    + triggerEvent: string
+    + public once: boolean
+
+    + action(...args): void
+    + listener(...args): void
+}
+EventManager *-- Event : > Manage
+
+class interactionCreateEvent{
+}
+
+interactionCreateEvent <|-- Event
+
+
+class SlashCommandManager{
+    +items: SlashCommand[]
+
+    #contentError(): void
+    #fileContainItem(fileContent): boolean
+}
+SlashCommandManager <|-- BotItemManager
+
+SlashCommandManager *-- SlashCommand: > Manage
+
+
+class SlashCommand{
+    + addSubcommand(subCommand: SubCommand): SlashCommandSubcommandsOnlyBuilder
+    + buildFromObject(slashCommandObject: SlashCommandObject): void
+    + execute(): void
+}
+
+class SubCommand{
+    + name: String
+    + description: string
+}
+
+class SlashCommandOption {
+    + type: string
+    + description: string
+    + name: string
+    + required: boolean
+
+    + exportCommandOptions()
+    + extractArgumentFromInteraction(commandInteraction: CommandInteraction)
+    - checkIfReady()
+    - addAtributeToOption(option)
+}
+
+class Model{}
+
+
+
+class SlashCommandExecute {
+    + commandOptionSkeletons: CommandOptionSkeleton[]
+    + action: (arg0: CommandInteraction, arg1: {}) => void
+
+    + createCommandOptions(): SlashCommandOption[]
+    + execute(commandInteraction: CommandInteraction): void
+    + extractArgumentsFromInteraction()
+}
+
+
+
+BotClient *-- SlashCommandManager
+
+
+SlashCommand <|-- SlashCommandBuilder
+SubCommand <|-- SlashCommandSubcommandBuilder
+
+ModelManager *-- Model
+
+
+SlashCommand *-- SubCommand
+SlashCommand "1" *-- SlashCommandExecute
+SlashCommandExecute *-- SlashCommandOption
+SubCommand "1" *-- SlashCommandExecute
+
+@enduml
