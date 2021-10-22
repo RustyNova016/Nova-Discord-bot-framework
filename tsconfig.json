@@ -9,14 +9,14 @@
         "baseUrl": ".",
         "paths": {
             "@/*": [
-                "src/*"
+                "dist/*"
             ],
             "@core/*": [
-                "src/core/*"
+                "dist/core/*"
             ]
         },
         "rootDir": "src",
-        "outDir": "dist",
+        "outDir": "dist"
     },
     "exclude": [
         "node_modules"

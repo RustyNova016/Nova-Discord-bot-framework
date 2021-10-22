@@ -1,6 +1,8 @@
 import {EventManager} from "@core/class/Events/EventManager";
 import {SlashCommandManager} from "@core/class/SlashCommands/SlashCommandManager";
 import {Client, ClientOptions} from "discord.js";
+import {join} from "path";
+import {rootDir} from "../../constants";
 
 export class BotClient extends Client {
     public appToken: string;
@@ -10,10 +12,10 @@ export class BotClient extends Client {
     constructor(appToken: string, commandFolderPath: string, eventFolderPath: string, options: ClientOptions) {
         super(options);
         this.appToken = appToken;
-        this.commandFolderPath = commandFolderPath;
-        this.eventFolderPath = eventFolderPath;
+        this.commandFolderPath = join(rootDir, commandFolderPath);
+        this.eventFolderPath = join(rootDir, eventFolderPath);
 
-        this.loadItems()
+        this.loadItems();
     }
 
     override login(): Promise<string> {
@@ -28,9 +30,9 @@ export class BotClient extends Client {
         const slashCommandManager = new SlashCommandManager();
 
         eventManager.addFromFolder(this.eventFolderPath);
-        slashCommandManager.addFromFolder(this.commandFolderPath)
+        slashCommandManager.addFromFolder(this.commandFolderPath);
 
-        eventManager.addCommands(slashCommandManager);4
+        eventManager.addCommands(slashCommandManager);
         this.addEvents(eventManager);
     }
 
