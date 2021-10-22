@@ -1,3 +1,4 @@
+require('module-alias/register')
 import {BotClient} from "@core/class/BotClient";
 import {Intents} from "discord.js";
 
