@@ -1,2 +1,2 @@
 # nova_discord_bot_core
-Core module for my discord bots
+Framework for my discord bots
