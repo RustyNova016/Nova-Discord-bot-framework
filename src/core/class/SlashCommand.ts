@@ -56,4 +56,8 @@ export class SlashCommand extends SlashCommandBuilder {
         this.subCommands.push(subCommand);
         return super.addSubcommand(subCommand);
     }
+
+    public isInteractionFromCommand(commandInteraction: CommandInteraction){
+        return commandInteraction.commandName === this.name;
+    }
 }
