@@ -1,4 +1,4 @@
-import {isset} from "@core/class/miscFunctions";
+import {isset} from "@core/miscFunctions";
 import {Interaction} from "discord.js";
 
 export class Event {

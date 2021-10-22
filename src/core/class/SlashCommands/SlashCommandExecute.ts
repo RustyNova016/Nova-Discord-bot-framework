@@ -1,5 +1,5 @@
-import {SlashCommandOption} from "@core/class/SlashCommandOption";
-import {emptyArray} from "@core/class/miscFunctions";
+import {SlashCommandOption} from "@core/class/SlashCommands/SlashCommandOption";
+import {emptyArray} from "@core/miscFunctions";
 import {CommandInteraction} from "discord.js";
 
 

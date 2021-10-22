@@ -1,6 +1,6 @@
 import {BotItemManager} from "@core/class/BotItemManager";
-import {Event} from "@core/class/Event";
-import {SlashCommandManager} from "@core/class/SlashCommandManager";
+import {Event} from "@core/class/Events/Event";
+import {SlashCommandManager} from "@core/class/SlashCommands/SlashCommandManager";
 
 export class EventManager extends BotItemManager {
     public items: Event[];

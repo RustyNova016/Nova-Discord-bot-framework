@@ -1,5 +1,5 @@
-import {EventManager} from "@core/class/EventManager";
-import {SlashCommandManager} from "@core/class/SlashCommandManager";
+import {EventManager} from "@core/class/Events/EventManager";
+import {SlashCommandManager} from "@core/class/SlashCommands/SlashCommandManager";
 import {Client, ClientOptions} from "discord.js";
 
 export class BotClient extends Client {

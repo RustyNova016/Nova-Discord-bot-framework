@@ -1,5 +1,5 @@
-import {CommandOptionSkeleton} from "@core/class/SlashCommandExecute";
-import {isset} from "@core/class/miscFunctions";
+import {CommandOptionSkeleton} from "@core/class/SlashCommands/SlashCommandExecute";
+import {isset} from "@core/miscFunctions";
 import {SlashCommandStringOption} from "@discordjs/builders";
 import {CommandInteraction} from "discord.js";
 

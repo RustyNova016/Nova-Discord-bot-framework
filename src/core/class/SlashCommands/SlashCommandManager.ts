@@ -1,6 +1,6 @@
 import {BotItemManager} from "@core/class/BotItemManager";
-import {InteractionCreateEvent} from "@core/class/Event";
-import {SlashCommand} from "@core/class/SlashCommand";
+import {InteractionCreateEvent} from "@core/class/Events/Event";
+import {SlashCommand} from "@core/class/SlashCommands/SlashCommand";
 import {CommandInteraction, Interaction} from "discord.js";
 
 export class SlashCommandManager extends BotItemManager {

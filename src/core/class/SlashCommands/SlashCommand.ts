@@ -1,6 +1,6 @@
-import {SlashCommandExecute} from "@core/class/SlashCommandExecute";
-import {emptyArray, isset} from "@core/class/miscFunctions";
-import {SubCommand} from "@core/class/SubCommand";
+import {SlashCommandExecute} from "@core/class/SlashCommands/SlashCommandExecute";
+import {emptyArray, isset} from "@core/miscFunctions";
+import {SubCommand} from "@core/class/SlashCommands/SubCommand";
 import {SlashCommandBuilder, SlashCommandSubcommandsOnlyBuilder} from "@discordjs/builders";
 import {CommandInteraction} from "discord.js";
 
